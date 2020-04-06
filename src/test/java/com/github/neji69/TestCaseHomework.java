@@ -64,7 +64,7 @@ public class TestCaseHomework {
         assertThat(overviewPage.financeFreeLocator.getText())
                 .as("На странице отображается блок «Финансовая свобода»")
                 .contains("Финансовая свобода");
-        //at com.github.neji69.TestCaseHomework.testCase20(TestCaseHomework.java:62)
+        //at com.github.neji69.TestCaseHomework.testCase20(TestCaseHomework.java:60)
         //	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
         //	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
         //	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -97,6 +97,7 @@ public class TestCaseHomework {
             log.error("Не соответствие баланса", e);
         }
     }
+
     @AfterTest
     public void exitDriver() {
         driver.quit();

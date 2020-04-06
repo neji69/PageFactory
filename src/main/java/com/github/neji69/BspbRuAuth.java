@@ -7,20 +7,18 @@ import org.openqa.selenium.support.PageFactory;
 
 public class BspbRuAuth {
 
-    @FindBy (name = "username")
+    @FindBy(name = "username")
     public WebElement usernameLocator;
 
-    @FindBy (name = "password")
-    public WebElement passwordLocator ;
+    @FindBy(name = "password")
+    public WebElement passwordLocator;
 
-    @FindBy (css = ".btn-primary")
+    @FindBy(css = ".btn-primary")
     public WebElement loginButtonLocator;
-
 
     public BspbRuAuth(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
-
 
     BspbRuAuth inputLogin(String login) {
         usernameLocator.clear();
@@ -36,7 +34,7 @@ public class BspbRuAuth {
 
     TwoFactAuth clickButtonAuthorization(WebDriver driver) {
         loginButtonLocator.click();
-         return new TwoFactAuth(driver);
+        return new TwoFactAuth(driver);
     }
 
 //    public TwoFactAuth authorize(String login, String password, WebDriver driver) {

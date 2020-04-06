@@ -11,8 +11,9 @@ public class Home {
     public WebElement buttonOverview;
 
     public Home(WebDriver driver) {
-        PageFactory.initElements( driver, this);
+        PageFactory.initElements(driver, this);
     }
+
     public OverviewPage clickButtonOverview(WebDriver driver) {
         buttonOverview.click();
         return new OverviewPage(driver);
