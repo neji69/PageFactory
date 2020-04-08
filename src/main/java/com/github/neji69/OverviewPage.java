@@ -12,8 +12,9 @@ public class OverviewPage {
     }
 
     @FindBy(id = "can-spend")
-    public WebElement financeFreeLocator;
+    private WebElement financeFreeLocator;
 
-    @FindBy(className = "amount")
-    public WebElement financeFreeBalanceLocator;
+    public WebElement getFinanceFreeLocator() {
+        return financeFreeLocator;
+    }
 }

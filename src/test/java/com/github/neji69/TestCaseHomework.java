@@ -18,7 +18,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestCaseHomework {
 
-    private static final Logger log = LoggerFactory.getLogger(TestCaseHomework.class);
     WebDriver driver;
     WebDriverWait webDriverWait;
 
@@ -34,7 +33,7 @@ public class TestCaseHomework {
     }
 
     @Test
-    public void testCase20() throws InterruptedException {
+    public void testCase21() throws InterruptedException {
         //Данные для теста (логин,пароль и смс для авторизации)
         String login = "demo";
         String password = "demo";
@@ -55,47 +54,25 @@ public class TestCaseHomework {
                 .isEqualTo("Старт - Интернет банк - Банк Санкт-Петербург");
         OverviewPage overviewPage = home.clickButtonOverview(driver);
 
-        Thread.sleep(1500); // ошибка загрузки элемента. подгружается через раз. не понятно если писать явное ожидание, за что цепляться.
+        Thread.sleep(1000); // ошибка загрузки элемента. подгружается через раз. не понятно если писать явное ожидание, за что цепляться.
 
         assertThat(driver.getTitle())
                 .as("Открылась страница «Обзор»")
                 .contains("Обзор");
 
-        assertThat(overviewPage.financeFreeLocator.getText())
-                .as("На странице отображается блок «Финансовая свобода»")
-                .contains("Финансовая свобода");
-        //at com.github.neji69.TestCaseHomework.testCase20(TestCaseHomework.java:60)
-        //	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-        //	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-        //	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-        //	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
-        //	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:134)
-        //	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:597)
-        //	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-        //	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-        //	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:816)
-        //	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-        //	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+        assertThat(overviewPage.getFinanceFreeLocator().getText())
+                .as("На странице отображается блок «Финансовая свобода» и сумма в блоке 'финансовая свобода' в формате 123 456 789.00 ")
+                .contains("Финансовая свобода")
+                .containsPattern(pattern);
 
-        try {
-            // webDriverWait.until (ExpectedConditions.textMatches(overviewPage.financeFreeBalanceLocator,2 718 764.83"))
-            assertThat(overviewPage.financeFreeBalanceLocator.getText())
-                    .as(" с указанием суммы в формате 123 456 789.00 ")
-                    .containsPattern(pattern);
-        } catch (AssertionError e) {
-            log.error("Не соответствие формата баланса", e);
-
-        }
         //Навести курсор на сумму в блоке «Финансовая свобода»
         Actions actions = new Actions(driver);
-        actions.moveToElement(overviewPage.financeFreeLocator).build().perform();
-        try {
-            assertThat(overviewPage.financeFreeLocator.getText())
-                    .as("Появляется надпись: «Моих средств» с указанием суммы в формате 123 456 789.00 ")
-                    .containsPattern(pattern);
-        } catch (AssertionError e) {
-            log.error("Не соответствие баланса", e);
-        }
+        actions.moveToElement(overviewPage.getFinanceFreeLocator()).build().perform();
+
+        assertThat(overviewPage.getFinanceFreeLocator().getText())
+                .as("Появляется надпись: «Моих средств» с указанием суммы в формате 123 456 789.00 ")
+                .contains("Моих средств")
+                .containsPattern(pattern);
     }
 
     @AfterTest

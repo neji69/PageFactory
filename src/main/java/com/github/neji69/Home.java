@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 public class Home {
 
     @FindBy(id = "bank-overview")
-    public WebElement buttonOverview;
+    private WebElement buttonOverview;
 
     public Home(WebDriver driver) {
         PageFactory.initElements(driver, this);

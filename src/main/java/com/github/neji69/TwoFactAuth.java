@@ -8,10 +8,10 @@ import org.openqa.selenium.support.PageFactory;
 public class TwoFactAuth {
 
     @FindBy(id = "otp-code")
-    public WebElement smsCodeLocator;
+    private WebElement smsCodeLocator;
 
     @FindBy(id = "login-otp-button")
-    public WebElement smsButtonLocator;
+    private WebElement smsButtonLocator;
 
     public TwoFactAuth(WebDriver driver) {
         PageFactory.initElements(driver, this);
